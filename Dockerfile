@@ -23,9 +23,6 @@ RUN rbenv global ${RUBY_VERSION} && rbenv rehash
 RUN echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 RUN echo 'eval "$(rbenv init -)"' >> ~/.profile
 
-# skip the documentation
-RUN echo 'gem: --no-document' >> ~/.gemrc
-
 # Setting shim path due to non-interactive bash sessions not running rbenv init
 ENV PATH=/root/.rbenv/shims:$PATH
 
