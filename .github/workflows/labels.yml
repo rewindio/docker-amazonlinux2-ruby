@@ -1,0 +1,34 @@
+name: Labels
+
+on: pull_request
+
+jobs:
+  apply-label:
+    name: Label PR
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@1.0.0
+
+      - name: Sync Labels 
+        uses: crazy-max/ghaction-github-labeler@v1
+        with:
+          yaml_file: .github/labels.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Apply Label 
+        uses: actions/github-script@0.2.0
+        with:
+          github-token: ${{github.token}}
+          script: |
+            const branch_name = context.payload.pull_request.head.ref.toLowerCase()
+            console.log("Detected source branch name: " + branch_name)
+
+            if (branch_name.includes("hotfix") ) {
+              console.log("Branch " + branch_name + " is a hotfix - applying Hotfix label")
+              github.issues.addLabels({...context.issue, labels: ['hotfix']})
+            } else if (branch_name.includes("feature") ) {
+              console.log("Branch " + branch_name + " is a feature - applying Feature label")
+              github.issues.addLabels({...context.issue, labels: ['feature']})
+            }

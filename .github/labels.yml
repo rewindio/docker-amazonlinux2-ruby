@@ -1,0 +1,21 @@
+- name: hotfix
+  color: 63488F
+  description: "The fix is hot"
+- name: feature
+  color: EFECEC
+  description: "All features, all the time"
+- name: dependencies
+  color: 0366d6
+  description: "Pull requests that update a dependency file"
+- name: security
+  color: ee0701
+  description: "Pull requests that update a dependency file"
+- name: javascript
+  color: a9f9b3
+  description: "Pull requests that affects JS code"
+- name: ruby
+  color: e1ea64
+  description: "Pull requests that affects ruby code"
+- name: automerge
+  color: 006b75
+  description: "Set by dependabot for PRs that can be auto-merged"
