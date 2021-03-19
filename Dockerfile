@@ -23,6 +23,9 @@ RUN rbenv global ${RUBY_VERSION} && rbenv rehash
 RUN echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 RUN echo 'eval "$(rbenv init -)"' >> ~/.profile
 
+# Setting shim path due to non-interactive bash sessions not running rbenv init
+ENV PATH=/root/.rbenv/shims:$PATH
+
 RUN gem install bundler --version=2.1.4
 
 # add the node repo
