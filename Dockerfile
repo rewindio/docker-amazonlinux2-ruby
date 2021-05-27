@@ -6,7 +6,7 @@ FROM amazonlinux:2
 LABEL org.opencontainers.image.source https://github.com/rewindio/docker-amazonlinux2-ruby
 LABEL maintainer "Rewind DevOps <devops@rewind.io>"
 
-RUN yum update -y -q && yum install -y -q git which tar gcc-6 bzip2 openssl-devel libyaml-devel libffi-devel readline-devel zlib-devel gdbm-devel ncurses-devel gcc-c++ gcc make postgresql-devel
+RUN yum update -y -q && yum install -y -q git which zip tar gcc-6 bzip2 openssl-devel libyaml-devel libffi-devel readline-devel zlib-devel gdbm-devel ncurses-devel gcc-c++ gcc make postgresql-devel
 
 RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 
