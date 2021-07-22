@@ -7,6 +7,14 @@ on:
 
 jobs:
   docker:
+    strategy:
+      matrix:
+        ruby_version: [
+          2.6.7,
+          2.7.4
+        ]
+    env:
+      RUBY_VERSION: ${{ matrix.ruby_version }}
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
@@ -23,7 +31,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ github.repository }}:2.6.7
+          tags: ${{ github.repository }}:${{ matrix.ruby_version }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
