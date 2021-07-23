@@ -16,6 +16,7 @@ SHELL ["/bin/bash", "-l", "-c"]
 
 ENV PATH=/root/.rbenv/bin:/root/.rbenv/plugins/ruby-build/bin:$PATH
 
+ARG RUBY_VERSION
 RUN rbenv install ${RUBY_VERSION}
 RUN rbenv global ${RUBY_VERSION} && rbenv rehash
 
