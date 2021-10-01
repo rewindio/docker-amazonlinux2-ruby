@@ -11,25 +11,25 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -sL https://rpm.nodesource.com/setup_"${NODEJS_VERSION}".x | bash - && \
     curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo && \
     yum install -y \
-      bzip2 \
-      gcc \
+      bzip2-1.0.* \
+      gcc-7.3.* \
       gcc-6 \
-      gcc-c++ \
-      gdbm-devel \
-      git \
-      libffi-devel \
-      libyaml-devel \
-      make \
-      ncurses-devel \
-      nodejs \
-      openssl-devel \
-      postgresql-devel \
-      readline-devel \
-      tar \
-      which \
-      yarn \
-      zip \
-      zlib-devel && \
+      gcc-c++-7.3.* \
+      gdbm-devel-1.13* \
+      git-2.32.* \
+      libffi-devel-3.0.* \
+      libyaml-devel-0.1.4.* \
+      make-3.82* \
+      ncurses-devel-6.0.* \
+      nodejs-10.* \
+      openssl-devel-1.0.2k-* \
+      postgresql-devel-9.2.* \
+      readline-devel-6.2* \
+      tar-1.26* \
+      which-20* \
+      yarn-22* \
+      zip-3.0* \
+      zlib-devel-1.2.* && \
     yum clean all && \
     # rbenv
     git clone https://github.com/rbenv/rbenv.git ~/.rbenv && \
@@ -38,10 +38,10 @@ RUN curl -sL https://rpm.nodesource.com/setup_"${NODEJS_VERSION}".x | bash - && 
 ENV PATH=/root/.rbenv/bin:/root/.rbenv/plugins/ruby-build/bin:$PATH
 
 RUN rbenv install ${RUBY_VERSION} && \
-      rbenv global ${RUBY_VERSION} && \
-      rbenv rehash && \
-      echo "eval \"$(rbenv init -)\"" >> ~/.bashrc && \
-      echo "eval \"$(rbenv init -)\"" >> ~/.profile
+    rbenv global ${RUBY_VERSION} && \
+    rbenv rehash && \
+    echo "eval $(rbenv init -)" >> ~/.bashrc && \
+    echo "eval $(rbenv init -)" >> ~/.profile
 
 # Setting shim path due to non-interactive bash sessions not running rbenv init
 ENV PATH=/root/.rbenv/shims:$PATH
@@ -51,5 +51,6 @@ RUN gem install bundler --version=2.1.4
 # Blacklist DST Root CA X3
 # https://blog.devgenius.io/rhel-centos-7-fix-for-lets-encrypt-change-8af2de587fe4
 # https://github.com/mperham/sidekiq/issues/5008
-RUN trust dump --filter "pkcs11:id=%C4%A7%B1%A4%7B%2C%71%FA%DB%E1%4B%90%75%FF%C4%15%60%85%89%10;type=cert" > /etc/pki/ca-trust/source/blacklist/dst-root.p11-kit \
-    && update-ca-trust extract
+RUN trust dump --filter "pkcs11:id=%C4%A7%B1%A4%7B%2C%71%FA%DB%E1%4B%90%75%FF%C4%15%60%85%89%10;type=cert" \
+    > /etc/pki/ca-trust/source/blacklist/dst-root.p11-kit && \
+    update-ca-trust extract
