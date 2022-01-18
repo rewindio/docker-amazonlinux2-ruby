@@ -9,4 +9,5 @@ Ruby and nodejs are installed on the images, along with other common tools for d
  It currently builds and publishes the following to dockerhub:
  - `rewindio/docker-amazonlinux2-ruby:2.6.7`
  - `rewindio/docker-amazonlinux2-ruby:2.6.8`
+ - `rewindio/docker-amazonlinux2-ruby:2.6.9`
  - `rewindio/docker-amazonlinux2-ruby:2.7.4`
