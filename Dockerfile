@@ -21,7 +21,6 @@ RUN curl -sL https://rpm.nodesource.com/setup_"${NODEJS_VERSION}".x | bash - && 
       ncurses-devel-6.* \
       nodejs-${NODEJS_VERSION}.* \
       openssl-devel-1.0.2k-* \
-      postgresql-devel-9.* \
       readline-devel-6.2* \
       tar-1.26* \
       which-2.20* \
@@ -30,6 +29,8 @@ RUN curl -sL https://rpm.nodesource.com/setup_"${NODEJS_VERSION}".x | bash - && 
       zlib-devel-1.2.* && \
     yum clean all && \
     rm -rf /var/cache/yum && \
+    # postgres
+    amazon-linux-extras install -y postgresql13 && \
     # rbenv
     git clone https://github.com/rbenv/rbenv.git ~/.rbenv && \
     git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
