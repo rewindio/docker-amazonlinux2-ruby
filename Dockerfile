@@ -1,4 +1,4 @@
-FROM amazonlinux:2.0.20211001.0@sha256:28091ca56cd22253c7a5e99cb581dacee6678181208e2a7799d573bf25d51a63
+FROM amazonlinux:2.0.20211001.0@sha256:ed3698a4808d98cd6c3a388b82b59fa0bf6c831f1270c53e9896be16f9b3771c
 
 ARG RUBY_VERSION
 ARG NODEJS_VERSION=14
@@ -21,7 +21,6 @@ RUN curl -sL https://rpm.nodesource.com/setup_"${NODEJS_VERSION}".x | bash - && 
       ncurses-devel-6.* \
       nodejs-${NODEJS_VERSION}.* \
       openssl-devel-1.0.2k-* \
-      postgresql-devel-9.* \
       readline-devel-6.2* \
       tar-1.26* \
       which-2.20* \
@@ -30,9 +29,12 @@ RUN curl -sL https://rpm.nodesource.com/setup_"${NODEJS_VERSION}".x | bash - && 
       zlib-devel-1.2.* && \
     yum clean all && \
     rm -rf /var/cache/yum && \
+    # postgres
+    amazon-linux-extras install -y postgresql13
     # rbenv
     git clone https://github.com/rbenv/rbenv.git ~/.rbenv && \
-    git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+    git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build \
+    
 
 ENV PATH=/root/.rbenv/bin:/root/.rbenv/plugins/ruby-build/bin:$PATH
 
