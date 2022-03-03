@@ -30,7 +30,7 @@ RUN curl -sL https://rpm.nodesource.com/setup_"${NODEJS_VERSION}".x | bash - && 
     yum clean all && \
     rm -rf /var/cache/yum && \
     # postgres
-    amazon-linux-extras install -y postgresql13
+    amazon-linux-extras install -y postgresql13 && \
     # rbenv
     git clone https://github.com/rbenv/rbenv.git ~/.rbenv && \
     git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
