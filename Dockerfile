@@ -10,12 +10,15 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN curl -sL https://rpm.nodesource.com/setup_"${NODEJS_VERSION}".x | bash - && \
     curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo && \
+    # postgres
+    amazon-linux-extras install -y postgresql13 && \
     yum install -y \
       bzip2-1.* \
       gcc-c++-7.* \
       gdbm-devel-1.13* \
       git-2.* \
       libffi-devel-3.* \
+      libpq-devel.* \
       libyaml-devel-0.* \
       make-3* \
       ncurses-devel-6.* \
@@ -29,8 +32,6 @@ RUN curl -sL https://rpm.nodesource.com/setup_"${NODEJS_VERSION}".x | bash - && 
       zlib-devel-1.2.* && \
     yum clean all && \
     rm -rf /var/cache/yum && \
-    # postgres
-    amazon-linux-extras install -y postgresql13 && \
     # rbenv
     git clone https://github.com/rbenv/rbenv.git ~/.rbenv && \
     git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
