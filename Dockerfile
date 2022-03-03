@@ -34,7 +34,6 @@ RUN curl -sL https://rpm.nodesource.com/setup_"${NODEJS_VERSION}".x | bash - && 
     # rbenv
     git clone https://github.com/rbenv/rbenv.git ~/.rbenv && \
     git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build \
-    
 
 ENV PATH=/root/.rbenv/bin:/root/.rbenv/plugins/ruby-build/bin:$PATH
 
